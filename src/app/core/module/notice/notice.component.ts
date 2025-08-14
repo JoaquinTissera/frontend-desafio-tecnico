@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { INotice } from '../../../shared/interface/notice.interface';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-notice',
-  imports: [CommonModule],
-  templateUrl: './notice.html',
-  styleUrl: './notice.css',
+  imports: [CommonModule, SidebarComponent],
+  templateUrl: './notice.component.html',
+  styleUrl: './notice.component.css',
 })
 export class NoticeComponent {
   listNotice: INotice[] = [
@@ -61,5 +62,9 @@ export class NoticeComponent {
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
     target.src = 'img/censure.jpg'; // imagen alternativa desde carpeta pública
+  }
+
+  getNoticesBySideBar(): INotice[] {
+    return this.listNotice.slice(-3);
   }
 }

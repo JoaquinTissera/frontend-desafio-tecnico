@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { NoticeComponent } from './notice';
+import { NoticeComponent } from './notice.component';
 
 export default [
   {

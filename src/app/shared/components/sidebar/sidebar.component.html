@@ -1,0 +1,19 @@
+<div class="sidebar-cart">
+  @for (notice of notices; track notice) {
+    <div class="sidebar-content">
+      <div class="left-container">
+        <p id="text-creator">{{ notice.creator[0] }}</p>
+        <p id="text-title">{{ notice.title }}</p>
+        <p id="text-date">{{ notice.pubDate | date: 'medium' }}</p>
+      </div>
+      <div class="right-container">
+        <img
+          [src]="notice.image_url"
+          alt="Imagen de noticia"
+          class="notice-image"
+          (error)="onImageError($event)"
+        />
+      </div>
+    </div>
+  }
+</div>
