@@ -3,7 +3,10 @@
     <div class="top-notice">
       <div class="notice-content">
         <div class="creator-content">
-          <p>Autor: {{ notice.creator[0] }}</p>
+          <p>
+            Autor:
+            {{ notice.creator && notice.creator.length > 0 ? notice.creator[0] : 'Anonymous' }}
+          </p>
         </div>
         <h3>{{ notice.title }}</h3>
         <div class="image-content">
@@ -21,6 +24,9 @@
       <div class="sidebar-column-content">
         <app-sidebar [notices]="getNoticesBySideBar()"></app-sidebar>
       </div>
+    </div>
+    <div class="bottom-notice">
+      <app-carousel [notices]="listNotice" (noticeClick)="handleNoticeClick($event)"></app-carousel>
     </div>
   </div>
 } @else if (!notice && !isLoading) {

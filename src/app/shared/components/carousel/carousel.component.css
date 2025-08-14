@@ -1,0 +1,50 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.carousel-items {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  overflow: hidden;
+  flex: 1;
+}
+
+.carousel-item {
+  flex: 0 0 calc(23% - 10px); /* ancho para 3 elementos */
+  padding: 8px;
+  box-sizing: border-box;
+  width: 15%;
+}
+
+.carousel-item p {
+  max-width: 20rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notice-image {
+  width: 20rem;
+  height: 10rem;
+}
+
+.nav-button {
+  color: black;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.nav-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#text-creator {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #8a0808fc;
+}

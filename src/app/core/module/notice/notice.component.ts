@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { INotice } from '../../../shared/interface/notice.interface';
 import { CommonModule } from '@angular/common';
 import { catchError, of } from 'rxjs';
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
 import { NoticeService } from '../../../shared/service/notice.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { CarouselComponent } from '../../../shared/components/carousel/carousel.component';
 
 @Component({
   selector: 'app-notice',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, SpinnerComponent],
+  imports: [CommonModule, SidebarComponent, SpinnerComponent, CarouselComponent],
   templateUrl: './notice.component.html',
   styleUrls: ['./notice.component.css'],
 })
 export class NoticeComponent implements OnInit {
   listNotice: INotice[] = [];
   notice: INotice | null = null;
-  isLoading: boolean = false
+  isLoading: boolean = false;
 
-  constructor(private noticeService: NoticeService) {}
+  constructor(
+    private noticeService: NoticeService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.loadNotices();
@@ -32,13 +36,13 @@ export class NoticeComponent implements OnInit {
         catchError((err) => {
           console.error('Error cargando noticias', err);
           return of([]);
-          this.isLoading = false
+          this.isLoading = false;
         }),
       )
       .subscribe((notices: INotice[]) => {
         this.listNotice = notices;
         this.notice = notices[0] || null;
-        this.isLoading = false
+        this.isLoading = false;
       });
   }
 
@@ -49,5 +53,10 @@ export class NoticeComponent implements OnInit {
 
   getNoticesBySideBar(): INotice[] {
     return this.listNotice.slice(-3);
+  }
+
+  handleNoticeClick(notice: INotice) {
+    this.notice = notice;
+    this.cdr.detectChanges();
   }
 }

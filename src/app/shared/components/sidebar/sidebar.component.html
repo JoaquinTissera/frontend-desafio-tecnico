@@ -2,7 +2,10 @@
   @for (notice of notices; track notice) {
     <div class="sidebar-content">
       <div class="left-container">
-        <p id="text-creator">{{ notice.creator[0] }}</p>
+        <p id="text-creator">
+          Autor:
+          {{ notice.creator && notice.creator.length > 0 ? notice.creator[0] : 'Anonymous' }}
+        </p>
         <p id="text-title">{{ notice.title }}</p>
         <p id="text-date">{{ notice.pubDate | date: 'medium' }}</p>
       </div>

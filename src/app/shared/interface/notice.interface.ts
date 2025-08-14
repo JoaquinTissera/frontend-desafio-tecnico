@@ -5,5 +5,5 @@ export interface INotice {
   description: string;
   pubDate: string;
   image_url: string;
-  creator: string[];
+  creator: string[] | null;
 }

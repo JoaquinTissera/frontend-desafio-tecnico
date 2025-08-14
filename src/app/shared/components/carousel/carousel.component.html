@@ -1,0 +1,29 @@
+<div class="carousel-container">
+  <button class="nav-button prev" (click)="prev()" [disabled]="currentIndex === 0">&#8592;</button>
+
+  <div class="carousel-items">
+    @for (notice of visibleNotices; track notice.title) {
+      <div class="carousel-item" (click)="onNoticeClick(notice)">
+        <img
+          [src]="notice.image_url"
+          alt="Imagen"
+          class="notice-image"
+          (error)="onImageError($event)"
+        />
+        <p id="text-creator">
+          Autor:
+          {{ notice.creator && notice.creator.length > 0 ? notice.creator[0] : 'Anonymous' }}
+        </p>
+        <p>{{ notice.description }}</p>
+      </div>
+    }
+  </div>
+
+  <button
+    class="nav-button next"
+    (click)="next()"
+    [disabled]="currentIndex + itemsPerPage >= notices.length"
+  >
+    &#8594;
+  </button>
+</div>
