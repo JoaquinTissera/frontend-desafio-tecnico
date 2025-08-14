@@ -6,7 +6,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
   selector: 'app-root',
   imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('frontend-desafio-tecnico');
