@@ -1,26 +1,30 @@
-<div class="notice-card">
-  <div class="top-notice">
-    <div class="notice-content">
-      <div class="creator-content">
-        <p>Autor: {{ notice.creator[0] }}</p>
-      </div>
-      <h3>{{ notice.title }}</h3>
-      <div class="image-content">
-        <img
-          [src]="notice.image_url"
-          alt="Imagen de noticia"
-          class="notice-image"
-          (error)="onImageError($event)"
-        />
-      </div>
-      <div class="description-content">
-        <p>{{ notice.description }}</p>
+@if (notice && !isLoading) {
+  <div class="notice-card">
+    <div class="top-notice">
+      <div class="notice-content">
+        <div class="creator-content">
+          <p>Autor: {{ notice.creator[0] }}</p>
+        </div>
+        <h3>{{ notice.title }}</h3>
+        <div class="image-content">
+          <img
+            [src]="notice.image_url"
+            alt="Imagen de noticia"
+            class="notice-image"
+            (error)="onImageError($event)"
+          />
+        </div>
+        <p class="description-text">{{ notice.description }}</p>
         <p class="notice-date">Publicado: {{ notice.pubDate | date: 'medium' }}</p>
+        <a [href]="notice.link" target="_blank" class="notice-link">Leer más</a>
       </div>
-      <a [href]="notice.link" target="_blank" class="notice-link">Leer más</a>
-    </div>
-    <div class="sidebad-column-content">
-      <app-sidebar [notices]="getNoticesBySideBar()"></app-sidebar>
+      <div class="sidebar-column-content">
+        <app-sidebar [notices]="getNoticesBySideBar()"></app-sidebar>
+      </div>
     </div>
   </div>
-</div>
+} @else if (!notice && !isLoading) {
+  <div class="no-news">Lo sentimos mucho, no hay noticias.</div>
+} @else if (isLoading) {
+  <app-spinner></app-spinner>
+}

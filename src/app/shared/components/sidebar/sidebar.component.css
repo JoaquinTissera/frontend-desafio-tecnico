@@ -4,6 +4,7 @@
   justify-content: space-around;
   padding: 1.5rem;
   gap: 1.5rem; /* más espacio entre noticias */
+  height: auto;
 }
 
 .sidebar-content {

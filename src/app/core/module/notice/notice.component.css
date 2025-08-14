@@ -5,6 +5,7 @@
   height: 80%;
   margin: 0rem 1rem 1rem 2rem;
   overflow: hidden;
+  overflow-y: scroll;
 }
 
 .top-notice {
@@ -15,6 +16,7 @@
 }
 
 .notice-content {
+  flex: 0 0 60%;
   padding: 0.2rem 1rem 1rem 1rem;
 }
 
@@ -43,8 +45,8 @@
 }
 
 .notice-image {
-  height: 15rem;
-  width: 20rem;
+  height: 25rem;
+  width: auto;
 }
 
 .notice-link {
@@ -59,15 +61,20 @@
   text-decoration: underline;
 }
 
-.description-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: small;
+.description-text {
+  max-width: 60%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  line-height: 1.5;
 }
 
 .notice-date {
   font-size: 0.9em;
   color: #666;
   margin-top: 12px;
+}
+
+.sidebar-column-content {
+  flex: 0 0 40%;
 }

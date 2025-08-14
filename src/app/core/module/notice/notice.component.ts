@@ -1,63 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { INotice } from '../../../shared/interface/notice.interface';
 import { CommonModule } from '@angular/common';
+import { catchError, of } from 'rxjs';
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
+import { NoticeService } from '../../../shared/service/notice.service';
+import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-notice',
-  imports: [CommonModule, SidebarComponent],
+  standalone: true,
+  imports: [CommonModule, SidebarComponent, SpinnerComponent],
   templateUrl: './notice.component.html',
-  styleUrl: './notice.component.css',
+  styleUrls: ['./notice.component.css'],
 })
-export class NoticeComponent {
-  listNotice: INotice[] = [
-    {
-      article_id: '47ae80cc11ca20c181cf0dbe7f4da3a7',
-      title: 'Galaxy notice 3 could outclass Apple AirTag with one clever design upgrade',
-      link: 'https://www.sammobile.com/opinion/galaxy-notice-3-could-outclass-apple-airtag-with-one-clever-des...',
-      description:
-        "Although Samsung's original Galaxy notice was rather cheap-looking, especially in retrospect, the...",
-      pubDate: '2025-08-13 09:52:12',
-      image_url:
-        'https://www.sammobile.com/wp-content/uploads/2023/12/Galaxy-notice-2-review-1.jpg',
-      creator: ['Ayush Mukherjee'],
-    },
-    {
-      article_id: '47ae80cc11ca20c181cf0dbe7f4da3a7',
-      title: 'Galaxy notice 3 could outclass Apple AirTag with one clever design upgrade',
-      link: 'https://www.sammobile.com/opinion/galaxy-notice-3-could-outclass-apple-airtag-with-one-clever-des...',
-      description:
-        "Although Samsung's original Galaxy notice was rather cheap-looking, especially in retrospect, the...",
-      pubDate: '2025-08-13 09:52:12',
-      image_url:
-        'https://www.sammobile.com/wp-content/uploads/2023/12/Galaxy-notice-2-review-1.jpg',
-      creator: ['Ayush Mukherjee'],
-    },
-    {
-      article_id: '47ae80cc11ca20c181cf0dbe7f4da3a7',
-      title: 'Galaxy notice 3 could outclass Apple AirTag with one clever design upgrade',
-      link: 'https://www.sammobile.com/opinion/galaxy-notice-3-could-outclass-apple-airtag-with-one-clever-des...',
-      description:
-        "Although Samsung's original Galaxy notice was rather cheap-looking, especially in retrospect, the...",
-      pubDate: '2025-08-13 09:52:12',
-      image_url:
-        'https://www.sammobile.com/wp-content/uploads/2023/12/Galaxy-notice-2-review-1.jpg',
-      creator: ['Ayush Mukherjee'],
-    },
-    {
-      article_id: '47ae80cc11ca20c181cf0dbe7f4da3a7',
-      title: 'Galaxy notice 3 could outclass Apple AirTag with one clever design upgrade',
-      link: 'https://www.sammobile.com/opinion/galaxy-notice-3-could-outclass-apple-airtag-with-one-clever-des...',
-      description:
-        "Although Samsung's original Galaxy notice was rather cheap-looking, especially in retrospect, the...",
-      pubDate: '2025-08-13 09:52:12',
-      image_url:
-        'https://www.sammobile.com/wp-content/uploads/2023/12/Galaxy-notice-2-review-1.jpg',
-      creator: ['Ayush Mukherjee'],
-    },
-  ];
+export class NoticeComponent implements OnInit {
+  listNotice: INotice[] = [];
+  notice: INotice | null = null;
+  isLoading: boolean = false
 
-  notice = this.listNotice[0];
+  constructor(private noticeService: NoticeService) {}
+
+  ngOnInit(): void {
+    this.loadNotices();
+  }
+
+  loadNotices(query: string = 'apple', language: string = 'en'): void {
+    this.isLoading = true;
+    this.noticeService
+      .getLatestNotice(query, language)
+      .pipe(
+        catchError((err) => {
+          console.error('Error cargando noticias', err);
+          return of([]);
+          this.isLoading = false
+        }),
+      )
+      .subscribe((notices: INotice[]) => {
+        this.listNotice = notices;
+        this.notice = notices[0] || null;
+        this.isLoading = false
+      });
+  }
 
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
