@@ -2,4 +2,9 @@
   <div class="logo">
     <a routerLink="/">MFNews</a>
   </div>
+  <div>
+    <app-notice-bottom mode="add" [notice]="null"></app-notice-bottom>
+    <app-notice-bottom mode="edit" [notice]="notice"></app-notice-bottom>
+    <app-notice-bottom mode="delete" [notice]="notice"></app-notice-bottom>
+  </div>
 </nav>

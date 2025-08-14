@@ -6,11 +6,12 @@ import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.com
 import { NoticeService } from '../../../shared/service/notice.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { CarouselComponent } from '../../../shared/components/carousel/carousel.component';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-notice',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, SpinnerComponent, CarouselComponent],
+  imports: [CommonModule, NavbarComponent, SidebarComponent, SpinnerComponent, CarouselComponent],
   templateUrl: './notice.component.html',
   styleUrls: ['./notice.component.css'],
 })
@@ -44,6 +45,7 @@ export class NoticeComponent implements OnInit {
         this.notice = notices[0] || null;
         this.isLoading = false;
       });
+    this.cdr.detectChanges();
   }
 
   onImageError(event: Event) {

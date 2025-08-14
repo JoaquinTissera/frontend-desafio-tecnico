@@ -13,7 +13,7 @@
 }
 
 .carousel-item {
-  flex: 0 0 calc(23% - 10px); /* ancho para 3 elementos */
+  flex: 0 0 calc(23% - 10px);
   padding: 8px;
   box-sizing: border-box;
   width: 15%;
