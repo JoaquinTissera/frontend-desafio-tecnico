@@ -4,13 +4,13 @@ import { NoticeFormComponent } from '../notice-form/notice-form.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-notice-bottom',
+  selector: 'app-notice-button',
   imports: [],
-  templateUrl: './notice-bottom.component.html',
-  styleUrl: './notice-bottom.component.css',
+  templateUrl: './notice-button.component.html',
+  styleUrl: './notice-button.component.css',
   standalone: true,
 })
-export class NoticeBottomComponent implements OnInit {
+export class NoticeButtonComponent implements OnInit {
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
@@ -21,11 +21,6 @@ export class NoticeBottomComponent implements OnInit {
       data: { mode: 'add' },
     });
 
-    dialogRef.afterClosed().subscribe((result: INotice | null) => {
-      if (result) {
-        console.log('Noticia agregada/actualizada:', result);
-        // Aquí podés emitir un EventEmitter para notificar al padre
-      }
-    });
+    dialogRef.afterClosed().subscribe();
   }
 }

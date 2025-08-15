@@ -30,14 +30,24 @@
 }
 
 .creator-content {
-  margin: 1rem 0rem 0rem 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0 0 0;
 }
+
 
 .creator-content p {
   font-size: medium;
   font-weight: 900;
   color: #8a0808fc;
 }
+
+.notice-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
 
 .image-content {
   padding-top: 2rem;

@@ -18,7 +18,7 @@ export class NoticeFormComponent {
   constructor(
     private fb: FormBuilder,
     private noticeService: NoticeService,
-    private dialogRef: MatDialogRef<NoticeFormComponent>
+    private dialogRef: MatDialogRef<NoticeFormComponent>,
   ) {
     this.noticeForm = this.fb.group({
       link: [''],
@@ -41,12 +41,12 @@ export class NoticeFormComponent {
         creator: this.noticeForm.value.creator ? [this.noticeForm.value.creator] : null,
       };
 
-      this.noticeService.addNotice(newNotice)
-      this.dialogRef.close()
+      this.noticeService.addNotice(newNotice);
+      this.dialogRef.close();
     }
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

@@ -18,6 +18,11 @@ export class NoticeService extends BaseApiService {
     super(http);
   }
 
+  getNoticeById(noticeId: string | undefined) {
+    const currentNotices = this.noticesSubject.getValue();
+    return currentNotices.find((value) => value.article_id === noticeId);
+  }
+
   /**
    * Obtiene noticias desde la API y las guarda en cache local
    */
@@ -27,7 +32,7 @@ export class NoticeService extends BaseApiService {
         const notices = res.results as INotice[];
         this.noticesSubject.next(notices); // Actualiza cache
         return notices;
-      })
+      }),
     );
   }
 
@@ -36,5 +41,10 @@ export class NoticeService extends BaseApiService {
     const updated = [notice, ...current];
     this.noticesSubject.next(updated);
   }
-}
 
+  deleteNotice(noticeId: string | undefined) {
+    const currentNotices = this.noticesSubject.getValue();
+    const filter = currentNotices.filter((value) => value.article_id !== noticeId);
+    this.noticesSubject.next(filter);
+  }
+}

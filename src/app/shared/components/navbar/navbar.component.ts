@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { NoticeBottomComponent } from '../notice-bottom/notice-bottom.component';
-import { INotice } from '../../interface/notice.interface';
+import { NoticeButtonComponent } from '../notice-button/notice-button.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NoticeBottomComponent],
+  imports: [NoticeButtonComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })

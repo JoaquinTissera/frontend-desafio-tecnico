@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoticeBottomComponent } from './notice-bottom.component';
+import { NoticeButtonComponent } from './notice-button.component';
 
-describe('NoticeBottom', () => {
-  let component: NoticeBottomComponent;
-  let fixture: ComponentFixture<NoticeBottomComponent>;
+describe('NoticeButton', () => {
+  let component: NoticeButtonComponent;
+  let fixture: ComponentFixture<NoticeButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoticeBottomComponent],
+      imports: [NoticeButtonComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NoticeBottomComponent);
+    fixture = TestBed.createComponent(NoticeButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
