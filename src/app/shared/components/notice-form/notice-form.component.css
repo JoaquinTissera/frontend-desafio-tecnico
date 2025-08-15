@@ -1,0 +1,76 @@
+.form-container {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  max-width: 21.875rem; /* 350px */
+  margin: auto;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #8a0808fc;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 0.9375rem;
+  font-size: 0.875rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+textarea {
+  resize: none;
+  height: 5rem;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+
+.cancel-btn {
+  background: white;
+  color: #8a0808fc;
+  border: 0.0625rem solid #8a0808fc;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.save-btn {
+  background: #8a0808fc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.cancel-btn:hover {
+  background: rgba(138, 8, 8, 0.05);
+}
+
+.save-btn:hover {
+  background: rgba(138, 8, 8, 0.9);
+}

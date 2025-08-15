@@ -6,12 +6,11 @@ import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.com
 import { NoticeService } from '../../../shared/service/notice.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { CarouselComponent } from '../../../shared/components/carousel/carousel.component';
-import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-notice',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, SidebarComponent, SpinnerComponent, CarouselComponent],
+  imports: [CommonModule, SidebarComponent, SpinnerComponent, CarouselComponent],
   templateUrl: './notice.component.html',
   styleUrls: ['./notice.component.css'],
 })
@@ -26,6 +25,10 @@ export class NoticeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.noticeService.notices$.subscribe(data => {
+      this.listNotice = data;
+      this.notice = data[0]
+    });
     this.loadNotices();
   }
 

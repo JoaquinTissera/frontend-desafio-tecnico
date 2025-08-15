@@ -1,0 +1,26 @@
+<div class="form-container">
+  <h2>Nueva Noticia</h2>
+  <p>Completar los siguientes datos.</p>
+
+  <form [formGroup]="noticeForm" (ngSubmit)="onSubmit()">
+    <label>Url</label>
+    <input type="text" formControlName="link" />
+
+    <label>Imagen Url</label>
+    <input type="text" formControlName="image_url" />
+
+    <label>Autor</label>
+    <input type="text" formControlName="creator" />
+
+    <label>Título</label>
+    <input type="text" formControlName="title" />
+
+    <label>Descripción</label>
+    <textarea formControlName="description"></textarea>
+
+    <div class="button-row">
+      <button type="button" class="cancel-btn" (click)="onCancel()">Cancelar</button>
+      <button type="submit" class="save-btn">Guardar</button>
+    </div>
+  </form>
+</div>

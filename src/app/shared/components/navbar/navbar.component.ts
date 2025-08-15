@@ -8,6 +8,4 @@ import { INotice } from '../../interface/notice.interface';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
-  @Input() notice: INotice | null = null;
-}
+export class NavbarComponent {}

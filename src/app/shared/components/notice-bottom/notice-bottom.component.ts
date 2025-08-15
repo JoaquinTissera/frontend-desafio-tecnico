@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { INotice } from '../../interface/notice.interface';
-import { NoticeDialogComponent } from '../notice-dialog/notice-dialog.component';
+import { NoticeFormComponent } from '../notice-form/notice-form.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -11,27 +11,14 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: true,
 })
 export class NoticeBottomComponent implements OnInit {
-  @Input() mode: 'add' | 'edit' | 'delete' = 'add';
-  @Input() notice: INotice | null = null;
-
-  label: string = 'Agregar Noticia';
-  labelModel = {
-    add: 'Agregar Noticia',
-    edit: 'Editar Notica',
-    delete: 'Eliminar Notica',
-  };
-
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    this.label = this.labelModel[this.mode];
-    console.log(this.notice);
-  }
+  ngOnInit(): void {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(NoticeDialogComponent, {
+    const dialogRef = this.dialog.open(NoticeFormComponent, {
       width: '500px',
-      data: { notice: this.notice, mode: this.mode },
+      data: { mode: 'add' },
     });
 
     dialogRef.afterClosed().subscribe((result: INotice | null) => {
