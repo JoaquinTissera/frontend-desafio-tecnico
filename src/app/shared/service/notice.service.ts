@@ -42,6 +42,20 @@ export class NoticeService extends BaseApiService {
     this.noticesSubject.next(updated);
   }
 
+  updateNotice(updatedNotice: INotice) {
+    const currentNotices = this.noticesSubject.getValue();
+    const index = currentNotices.findIndex(n => n.article_id === updatedNotice.article_id);
+  
+    if (index !== -1) {
+      const updatedList = [...currentNotices];
+      updatedList[index] = { ...updatedNotice };
+  
+      const [movedItem] = updatedList.splice(index, 1);
+      updatedList.unshift(movedItem);
+  
+      this.noticesSubject.next(updatedList);
+    }
+  }
   deleteNotice(noticeId: string | undefined) {
     const currentNotices = this.noticesSubject.getValue();
     const filter = currentNotices.filter((value) => value.article_id !== noticeId);

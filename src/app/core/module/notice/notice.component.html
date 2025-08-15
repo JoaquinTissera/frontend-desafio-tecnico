@@ -9,7 +9,10 @@
             {{ notice.creator && notice.creator.length > 0 ? notice.creator[0] : 'Anonymous' }}
           </p>
           <div class="notice-actions">
-            <app-notice-button-icon mode="edit"></app-notice-button-icon>
+            <app-notice-button-icon
+              mode="edit"
+              [noticeId]="notice.article_id"
+            ></app-notice-button-icon>
             <app-notice-button-icon mode="delete" [noticeId]="notice.article_id">
             </app-notice-button-icon>
           </div>

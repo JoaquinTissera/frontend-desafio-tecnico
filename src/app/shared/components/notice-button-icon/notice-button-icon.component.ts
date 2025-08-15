@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoticeFormComponent } from '../notice-form/notice-form.component';
 import { NoticeService } from '../../service/notice.service';
@@ -19,17 +19,17 @@ export class NoticeButtonIcon {
   ) {}
 
   handleClick() {
-    if (this.mode === 'edit') {
-      this.openEditDialog(this.noticeId);
+    if (this.mode === 'edit' && this.noticeId) {
+      this.openEditDialog();
     } else if (this.mode === 'delete' && this.noticeId) {
       this.deleteNotice();
     }
   }
 
-  openEditDialog(noticeId: string | undefined) {
+  openEditDialog() {
     const dialogRef = this.dialog.open(NoticeFormComponent, {
       width: '500px',
-      data: { mode: 'edit', noticeId },
+      data: { mode: 'edit', noticeId: this.noticeId },
     });
 
     dialogRef.afterClosed().subscribe();

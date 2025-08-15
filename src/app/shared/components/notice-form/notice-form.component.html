@@ -1,8 +1,8 @@
 <div class="form-container">
-  <h2>Nueva Noticia</h2>
-  <p>Completar los siguientes datos.</p>
+  <h2>{{ mode === 'add' ? 'Nueva Noticia' : 'Editar Noticia' }}</h2>
+  <p>{{ mode == 'add' ? 'Completar' : 'Actulizar' }} los siguientes datos.</p>
 
-  <form [formGroup]="noticeForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="noticeForm" (ngSubmit)="handleClick()">
     <label>Url</label>
     <input type="text" formControlName="link" />
 

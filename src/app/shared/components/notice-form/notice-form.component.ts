@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { INotice } from '../../interface/notice.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { NoticeService } from '../../service/notice.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-notice-form',
@@ -12,14 +12,20 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './notice-form.component.css',
   standalone: true,
 })
-export class NoticeFormComponent {
+export class NoticeFormComponent implements OnInit {
   noticeForm: FormGroup;
+  mode: 'add' | 'edit' = 'add';
+  noticeId?: string;
 
   constructor(
     private fb: FormBuilder,
     private noticeService: NoticeService,
     private dialogRef: MatDialogRef<NoticeFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit'; noticeId?: string },
   ) {
+    this.mode = data.mode;
+    this.noticeId = data.noticeId;
+
     this.noticeForm = this.fb.group({
       link: [''],
       creator: [''],
@@ -29,10 +35,44 @@ export class NoticeFormComponent {
     });
   }
 
-  onSubmit() {
+  ngOnInit(): void {
+    if (this.noticeId) {
+      const notice = this.noticeService.getNoticeById(this.noticeId);
+      if (notice) {
+        this.noticeForm.patchValue(notice);
+      }
+    }
+  }
+
+  handleClick() {
+    if (this.mode === 'edit' && this.noticeId) {
+      this.editNotice();
+    } else if (this.mode === 'add') {
+      this.addNotice();
+    }
+  }
+
+  private editNotice() {
+    if (this.noticeForm.valid && this.noticeId) {
+      const updatedNotice: INotice = {
+        article_id: this.noticeId,
+        title: this.noticeForm.value.title,
+        link: this.noticeForm.value.link,
+        description: this.noticeForm.value.description,
+        pubDate: new Date().toISOString(),
+        image_url: this.noticeForm.value.image_url || '',
+        creator: this.noticeForm.value.creator ? [this.noticeForm.value.creator] : null,
+      };
+
+      this.noticeService.updateNotice(updatedNotice);
+      this.dialogRef.close();
+    }
+  }
+
+  private addNotice() {
     if (this.noticeForm.valid) {
       const newNotice: INotice = {
-        article_id: uuidv4(), // Genera ID único
+        article_id: uuidv4(),
         title: this.noticeForm.value.title,
         link: this.noticeForm.value.link,
         description: this.noticeForm.value.description,
