@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, map } from 'rxjs';
 import { BaseApiService } from './base.service';
 import { INotice } from '../interface/notice.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NoticeService extends BaseApiService {
-  private readonly baseUrl = 'https://newsdata.io/api/1/latest';
+  private readonly baseUrl = `${environment.apiBaseUrl}/latest`;
 
   // Estado en memoria (cache local)
   private noticesSubject = new BehaviorSubject<INotice[]>([]);

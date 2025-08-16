@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export abstract class BaseApiService {
-  protected readonly apiKey = 'pub_bdab741ff3bb4affa7ecb378e2072519';
+  protected readonly apiKey = environment.apiKey;
+  protected readonly apiBaseUrl = environment.apiBaseUrl;
 
   constructor(protected http: HttpClient) {}
 
