@@ -1,29 +1,32 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { INotice } from '../../../shared/interface/notice.interface';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
 import { NoticeService } from '../../../shared/service/notice.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { CarouselComponent } from '../../../shared/components/carousel/carousel.component';
-import { NoticeButtonIcon } from '../../../shared/components/notice-button-icon/notice-button-icon.component';
+
 
 @Component({
   selector: 'app-notice',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, SpinnerComponent, CarouselComponent, NoticeButtonIcon],
+  imports: [CommonModule, SidebarComponent, SpinnerComponent, CarouselComponent],
   templateUrl: './notice.component.html',
   styleUrls: ['./notice.component.css'],
 })
 export class NoticeComponent implements OnInit {
   listNotice: INotice[] = [];
   notice: INotice | null = null;
-  isLoading: boolean = false; 
+  isLoading: boolean = false;
 
   constructor(
     private noticeService: NoticeService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
   ) {}
+
 
   ngOnInit(): void {
     this.noticeService.notices$.subscribe((data) => {
@@ -46,7 +49,6 @@ export class NoticeComponent implements OnInit {
         catchError((err) => {
           console.error('Error cargando noticias', err);
           return of([]);
-          this.isLoading = false;
         }),
       )
       .subscribe((notices: INotice[]) => {
@@ -81,7 +83,6 @@ export class NoticeComponent implements OnInit {
    * @param notice - Noticia seleccionada
    */
   handleNoticeClick(notice: INotice) {
-    this.notice = notice;
-    this.cdr.detectChanges();
+    this.router.navigate(["/detail", notice.article_id]);
   }
 }

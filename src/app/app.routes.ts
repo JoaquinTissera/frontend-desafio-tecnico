@@ -6,7 +6,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./core/module/notice/notice.routes'),
+        loadChildren: () => import('./core/module/notice.routes'),
       },
     ],
   },

@@ -2,16 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { INotice } from '../../interface/notice.interface';
 
+/**
+ * Componente sidebar que muestra noticias relacionadas
+ * Componente reutilizable que recibe noticias como input
+ * Emite eventos cuando se hace click en una noticia para navegar al detail
+ */
 @Component({
   selector: 'app-sidebar',
   imports: [CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
-  standalone: true,
+  standalone: true, // Componente standalone (no necesita módulo)
 })
 export class SidebarComponent {
-  @Input() notices: INotice[] = [];
-  @Output() noticeClick = new EventEmitter<INotice>();
+  @Input() notices: INotice[] = []; // Recibe noticias desde el componente padre
+  @Output() noticeClick = new EventEmitter<INotice>(); // Emite evento cuando se hace click en una noticia
 
   /**
    * Maneja errores de carga de imágenes
@@ -20,15 +25,15 @@ export class SidebarComponent {
    */
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
-    target.src = 'img/censure.jpg';
+    target.src = 'img/censure.jpg'; // Imagen alternativa desde carpeta pública
   }
 
   /**
    * Maneja el click en una noticia del sidebar
-   * Emite la noticia clickeada al componente padre
+   * Emite la noticia clickeada al componente padre para navegar al detail
    * @param notice - Noticia seleccionada
    */
   onNoticeClick(notice: INotice) {
-    this.noticeClick.emit(notice);
+    this.noticeClick.emit(notice); // Emite la noticia clickeada al padre
   }
 }

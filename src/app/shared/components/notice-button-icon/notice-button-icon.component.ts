@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoticeFormComponent } from '../notice-form/notice-form.component';
 import { NoticeService } from '../../service/notice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notice-button-icon',
@@ -14,8 +15,9 @@ export class NoticeButtonIcon {
   @Input() noticeId?: string;
 
   constructor(
-    private dialog: MatDialog, // Servicio para abrir modales/dialogs
-    private noticeService: NoticeService, // Servicio para operaciones CRUD
+    private dialog: MatDialog,
+    private noticeService: NoticeService,
+    private router: Router,
   ) {}
 
   /**
@@ -40,7 +42,9 @@ export class NoticeButtonIcon {
       data: { mode: 'edit', noticeId: this.noticeId },
     });
 
-    dialogRef.afterClosed().subscribe();
+    dialogRef.afterClosed().subscribe(()=> {
+      this.returnList()
+    })
   }
 
   /**
@@ -49,5 +53,11 @@ export class NoticeButtonIcon {
    */
   deleteNotice() {
     this.noticeService.deleteNotice(this.noticeId);
+    this.returnList()
+
+  }
+
+  returnList() {
+    this.router.navigate(["/"])
   }
 }

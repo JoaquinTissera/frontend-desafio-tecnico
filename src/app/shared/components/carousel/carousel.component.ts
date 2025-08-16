@@ -1,18 +1,24 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { INotice } from '../../interface/notice.interface';
 
+/**
+ * Componente carousel para navegar entre noticias
+ * Implementa paginación simple con botones prev/next
+ * Muestra un número limitado de noticias por página
+ * Navega al detail component al hacer click en una noticia
+ */
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css'],
-  standalone: true,
+  standalone: true, // Componente standalone (no necesita módulo)
 })
 export class CarouselComponent {
-  @Input() notices: INotice[] = [];
-  @Output() noticeClick = new EventEmitter<INotice>();
+  @Input() notices: INotice[] = []; // Lista completa de noticias desde el componente padre
+  @Output() noticeClick = new EventEmitter<INotice>(); // Evento emitido cuando se hace click en una noticia
 
-  currentIndex: number = 0;
-  itemsPerPage: number = 3;
+  currentIndex: number = 0; // Índice actual del carousel (posición de inicio)
+  itemsPerPage: number = 3; // Número de items visibles por página
 
   /**
    * Getter que calcula las noticias visibles según el índice actual
@@ -51,15 +57,15 @@ export class CarouselComponent {
    */
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
-    target.src = 'img/censure.jpg';
+    target.src = 'img/censure.jpg'; // Imagen alternativa desde carpeta pública
   }
 
   /**
    * Maneja el click en una noticia del carousel
-   * Emite la noticia clickeada al componente padre
+   * Emite la noticia clickeada al componente padre para navegar al detail
    * @param notice - Noticia seleccionada
    */
   onNoticeClick(notice: INotice) {
-    this.noticeClick.emit(notice);
+    this.noticeClick.emit(notice); // Emite la noticia clickeada al padre
   }
 }

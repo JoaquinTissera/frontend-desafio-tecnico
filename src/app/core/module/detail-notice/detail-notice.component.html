@@ -1,35 +1,44 @@
 @if (notice && !isLoading) {
-  <div class="notice-card">
-    <div class="top-notice">
-      <div class="notice-content">
+  <div class="detail-notice-card">
+    <div class="top-detail-notice">
+      <div class="detail-notice-content">
+        <button class="back-btn" (click)="goBack()">← Volver</button>
+        
         <div class="creator-content">
           <p>
             Autor:
             {{ notice.creator && notice.creator.length > 0 ? notice.creator[0] : 'Anonymous' }}
           </p>
+          <div class="notice-actions">
+            <app-notice-button-icon
+              mode="edit"
+              [noticeId]="notice.article_id"
+            ></app-notice-button-icon>
+            <app-notice-button-icon mode="delete" [noticeId]="notice.article_id">
+            </app-notice-button-icon>
+          </div>
         </div>
 
-        <h3  (click)="handleNoticeClick(notice)">{{ notice.title }}</h3>
+        <h3>{{ notice.title }}</h3>
+        
         <div class="image-content">
           <img
             [src]="notice.image_url"
             alt="Imagen de noticia"
             class="notice-image"
             (error)="onImageError($event)"
-            (click)="handleNoticeClick(notice)"
           />
         </div>
         
+        <p class="description-text">{{ notice.description }}</p>
+        
         <p class="notice-date">Publicado: {{ notice.pubDate | date: 'medium' }}</p>
+        
+        <a [href]="notice.link" target="_blank" class="notice-link">Leer más</a>
       </div>
       
-      <div class="sidebar-column-content">
-        <app-sidebar [notices]="getNoticesBySideBar()" (noticeClick)="handleNoticeClick($event)"></app-sidebar>
-      </div>
     </div>
-    <div class="bottom-notice">
-      <app-carousel [notices]="listNotice" (noticeClick)="handleNoticeClick($event)"></app-carousel>
-    </div>
+
   </div>
 } @else if (!notice && !isLoading) {
   <div class="no-news">Lo sentimos mucho, no hay noticias.</div>
