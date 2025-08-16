@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './spinner.component.html',
   styleUrl: './spinner.component.css',
+  standalone: true,
 })
 export class SpinnerComponent {}

@@ -13,6 +13,7 @@ body {
 body {
   line-height: 1.5;
   font-family: system-ui, sans-serif;
+  font-size: 16px; /* Base font size for rem calculations */
 }
 
 html,
@@ -22,4 +23,24 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+/* Estilos específicos para móviles 412x915 */
+@media (max-width: 412px) {
+  body {
+    font-size: 11px;
+  }
 }
