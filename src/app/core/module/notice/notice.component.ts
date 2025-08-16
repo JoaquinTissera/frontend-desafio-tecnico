@@ -18,7 +18,7 @@ import { NoticeButtonIcon } from '../../../shared/components/notice-button-icon/
 export class NoticeComponent implements OnInit {
   listNotice: INotice[] = [];
   notice: INotice | null = null;
-  isLoading: boolean = false;
+  isLoading: boolean = false; 
 
   constructor(
     private noticeService: NoticeService,
@@ -33,6 +33,11 @@ export class NoticeComponent implements OnInit {
     this.loadNotices();
   }
 
+  /**
+   * Método para cargar noticias desde la API
+   * @param query - Término de búsqueda (por defecto: 'apple')
+   * @param language - Idioma de las noticias (por defecto: 'en')
+   */
   loadNotices(query: string = 'apple', language: string = 'en'): void {
     this.isLoading = true;
     this.noticeService
@@ -52,15 +57,29 @@ export class NoticeComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  /**
+   * Maneja errores de carga de imágenes
+   * Reemplaza la imagen que falló con una imagen alternativa
+   * @param event - Evento de error de la imagen
+   */
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
-    target.src = 'img/censure.jpg'; // imagen alternativa desde carpeta pública
+    target.src = 'img/censure.jpg';
   }
 
+  /**
+   * Obtiene las últimas 3 noticias para mostrar en el sidebar
+   * @returns Array con las últimas 3 noticias
+   */
   getNoticesBySideBar(): INotice[] {
-    return this.listNotice.slice(-3);
+    return this.listNotice.slice(-3); // Toma los últimos 3 elementos del array
   }
 
+  /**
+   * Maneja el click en una noticia desde el sidebar o carousel
+   * Actualiza la noticia seleccionada y fuerza la actualización de la vista
+   * @param notice - Noticia seleccionada
+   */
   handleNoticeClick(notice: INotice) {
     this.notice = notice;
     this.cdr.detectChanges();

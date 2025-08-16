@@ -10,14 +10,18 @@ import { NoticeService } from '../../service/notice.service';
   styleUrls: ['./notice-button-icon.component.css'],
 })
 export class NoticeButtonIcon {
-  @Input() mode: 'edit' | 'delete' = 'edit'; // 'edit' o 'delete'
-  @Input() noticeId?: string; // Necesario para el borrado
+  @Input() mode: 'edit' | 'delete' = 'edit';
+  @Input() noticeId?: string;
 
   constructor(
-    private dialog: MatDialog,
-    private noticeService: NoticeService,
+    private dialog: MatDialog, // Servicio para abrir modales/dialogs
+    private noticeService: NoticeService, // Servicio para operaciones CRUD
   ) {}
 
+  /**
+   * Maneja el click en el botón de icono
+   * Determina la acción basada en el modo del botón
+   */
   handleClick() {
     if (this.mode === 'edit' && this.noticeId) {
       this.openEditDialog();
@@ -26,6 +30,10 @@ export class NoticeButtonIcon {
     }
   }
 
+  /**
+   * Abre el dialog de edición de noticia
+   * Pasa el ID de la noticia al formulario para cargar datos existentes
+   */
   openEditDialog() {
     const dialogRef = this.dialog.open(NoticeFormComponent, {
       width: '500px',
@@ -35,6 +43,10 @@ export class NoticeButtonIcon {
     dialogRef.afterClosed().subscribe();
   }
 
+  /**
+   * Elimina una noticia del servicio
+   * Utiliza el ID de la noticia para identificarla
+   */
   deleteNotice() {
     this.noticeService.deleteNotice(this.noticeId);
   }

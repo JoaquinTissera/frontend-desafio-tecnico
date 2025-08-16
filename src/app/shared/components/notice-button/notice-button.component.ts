@@ -15,6 +15,10 @@ export class NoticeButtonComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Abre el dialog para crear una nueva noticia
+   * Inicializa el formulario en modo 'add'
+   */
   openDialog() {
     const dialogRef = this.dialog.open(NoticeFormComponent, {
       width: '500px',
