@@ -1,6 +1,6 @@
 <div class="sidebar-cart">
   @for (notice of notices; track notice) {
-    <div class="sidebar-content">
+    <div class="sidebar-content" (click)="onNoticeClick(notice)">
       <div class="left-container">
         <p id="text-creator">
           Autor:

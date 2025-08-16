@@ -32,7 +32,7 @@
         <a [href]="notice.link" target="_blank" class="notice-link">Leer más</a>
       </div>
       <div class="sidebar-column-content">
-        <app-sidebar [notices]="getNoticesBySideBar()"></app-sidebar>
+        <app-sidebar [notices]="getNoticesBySideBar()" (noticeClick)="handleNoticeClick($event)"></app-sidebar>
       </div>
     </div>
     <div class="bottom-notice">

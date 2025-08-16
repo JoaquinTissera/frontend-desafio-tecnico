@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { INotice } from '../../interface/notice.interface';
 
 @Component({
@@ -11,9 +11,15 @@ import { INotice } from '../../interface/notice.interface';
 })
 export class SidebarComponent {
   @Input() notices: INotice[] = [];
+  @Output() noticeClick = new EventEmitter<INotice>();
 
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
-    target.src = 'img/censure.jpg'; // imagen alternativa desde carpeta pública
+    target.src = 'img/censure.jpg';
+  }
+
+  
+  onNoticeClick(notice: INotice) {
+    this.noticeClick.emit(notice);
   }
 }
