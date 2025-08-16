@@ -3,7 +3,7 @@
     <div class="top-detail-notice">
       <div class="detail-notice-content">
         <button class="back-btn" (click)="goBack()">← Volver</button>
-        
+
         <div class="creator-content">
           <p>
             Autor:
@@ -20,7 +20,7 @@
         </div>
 
         <h3>{{ notice.title }}</h3>
-        
+
         <div class="image-content">
           <img
             [src]="notice.image_url"
@@ -29,16 +29,14 @@
             (error)="onImageError($event)"
           />
         </div>
-        
+
         <p class="description-text">{{ notice.description }}</p>
-        
+
         <p class="notice-date">Publicado: {{ notice.pubDate | date: 'medium' }}</p>
-        
+
         <a [href]="notice.link" target="_blank" class="notice-link">Leer más</a>
       </div>
-      
     </div>
-
   </div>
 } @else if (!notice && !isLoading) {
   <div class="no-news">Lo sentimos mucho, no hay noticias.</div>

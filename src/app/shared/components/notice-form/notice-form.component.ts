@@ -24,7 +24,7 @@ export class NoticeFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit'; noticeId?: string },
   ) {
     this.mode = data.mode;
-    this.noticeId = data.noticeId; 
+    this.noticeId = data.noticeId;
 
     // Inicializa el formulario reactivo con campos vacíos
     this.noticeForm = this.fb.group({

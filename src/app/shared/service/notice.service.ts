@@ -29,17 +29,32 @@ export class NoticeService extends BaseApiService {
   }
 
   /**
-   * Obtiene noticias desde la API y las guarda en cache local
-   * Utiliza el patrón Observer para mantener datos actualizados
+   * Obtiene noticias desde la API y las guarda en cache local.
+   * Si ya hay datos en cache y no se pide refresh, devuelve lo que está en memoria.
    * @param query - Término de búsqueda (por defecto: 'apple')
    * @param language - Idioma de las noticias (por defecto: 'en')
+   * @param forceRefresh - Si true, vuelve a pedir datos a la API aunque haya cache
    * @returns Observable con array de noticias
    */
-  getLatestNotice(query: string = 'apple', language: string = 'en'): Observable<INotice[]> {
+  getLatestNotice(
+    query: string = 'apple',
+    language: string = 'en',
+    forceRefresh: boolean = false,
+  ): Observable<INotice[]> {
+    const current = this.noticesSubject.getValue();
+
+    if (current.length > 0 && !forceRefresh) {
+      // Ya tengo datos en cache → devuelvo el observable actual
+      return this.notices$;
+    }
+
     return this.get(this.baseUrl, { q: query, language }).pipe(
       map((res: any) => {
         const notices = res.results as INotice[];
+
+        // Refrescar solo si cache vacío o forzado
         this.noticesSubject.next(notices);
+
         return notices;
       }),
     );

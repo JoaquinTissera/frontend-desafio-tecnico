@@ -9,7 +9,7 @@
           </p>
         </div>
 
-        <h3  (click)="handleNoticeClick(notice)">{{ notice.title }}</h3>
+        <h3 (click)="handleNoticeClick(notice)">{{ notice.title }}</h3>
         <div class="image-content">
           <img
             [src]="notice.image_url"
@@ -19,12 +19,15 @@
             (click)="handleNoticeClick(notice)"
           />
         </div>
-        
+
         <p class="notice-date">Publicado: {{ notice.pubDate | date: 'medium' }}</p>
       </div>
-      
+
       <div class="sidebar-column-content">
-        <app-sidebar [notices]="getNoticesBySideBar()" (noticeClick)="handleNoticeClick($event)"></app-sidebar>
+        <app-sidebar
+          [notices]="getNoticesBySideBar()"
+          (noticeClick)="handleNoticeClick($event)"
+        ></app-sidebar>
       </div>
     </div>
     <div class="bottom-notice">

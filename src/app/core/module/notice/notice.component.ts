@@ -8,7 +8,6 @@ import { NoticeService } from '../../../shared/service/notice.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { CarouselComponent } from '../../../shared/components/carousel/carousel.component';
 
-
 @Component({
   selector: 'app-notice',
   standalone: true,
@@ -26,7 +25,6 @@ export class NoticeComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router,
   ) {}
-
 
   ngOnInit(): void {
     this.noticeService.notices$.subscribe((data) => {
@@ -83,6 +81,6 @@ export class NoticeComponent implements OnInit {
    * @param notice - Noticia seleccionada
    */
   handleNoticeClick(notice: INotice) {
-    this.router.navigate(["/detail", notice.article_id]);
+    this.router.navigate(['/detail', notice.article_id]);
   }
 }

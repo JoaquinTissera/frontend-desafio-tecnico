@@ -19,17 +19,14 @@ export class DetailNoticeComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(
-    private noticeService: NoticeService, 
+    private noticeService: NoticeService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.loadNoticeFromRoute();
-
   }
-
-
 
   /**
    * Carga la noticia específica basada en el ID de la ruta
@@ -41,10 +38,10 @@ export class DetailNoticeComponent implements OnInit {
       if (foundNotice) {
         this.notice = foundNotice;
       } else {
-        this.goBack()
+        this.goBack();
       }
     } else {
-      this.goBack()
+      this.goBack();
     }
   }
 

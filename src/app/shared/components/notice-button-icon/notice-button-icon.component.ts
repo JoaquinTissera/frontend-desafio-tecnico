@@ -42,9 +42,9 @@ export class NoticeButtonIcon {
       data: { mode: 'edit', noticeId: this.noticeId },
     });
 
-    dialogRef.afterClosed().subscribe(()=> {
-      this.returnList()
-    })
+    dialogRef.afterClosed().subscribe(() => {
+      this.returnList();
+    });
   }
 
   /**
@@ -53,11 +53,10 @@ export class NoticeButtonIcon {
    */
   deleteNotice() {
     this.noticeService.deleteNotice(this.noticeId);
-    this.returnList()
-
+    this.returnList();
   }
 
   returnList() {
-    this.router.navigate(["/"])
+    this.router.navigate(['/']);
   }
 }

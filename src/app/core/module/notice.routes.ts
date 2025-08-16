@@ -8,7 +8,7 @@ export default [
     component: NoticeComponent,
   },
   {
-    path: "detail/:id",
+    path: 'detail/:id',
     component: DetailNoticeComponent,
-  }
+  },
 ] as Routes;
